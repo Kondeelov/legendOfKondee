@@ -52,9 +52,9 @@ public class PeopleListAdapter extends BaseAdapter {
         }
 
         item.setIdNo(String.valueOf(getItemId(position)));
-//        item.setFirstName(dao.getItem().get(position).getFirstName());
-//        item.setLastName(dao.getItem().get(position).getLastName());
-//        item.setDateTime(dao.getItem().get(position).getLastUpdated().toString());
+        item.setFirstName(dao.getItem().get(position).getFirstName());
+        item.setLastName(dao.getItem().get(position).getLastName());
+        item.setDateTime(dao.getItem().get(position).getLastUpdated().toString());
 
         return item;
     }
