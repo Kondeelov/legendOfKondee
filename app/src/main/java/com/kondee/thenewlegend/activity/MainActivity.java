@@ -4,6 +4,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.kondee.thenewlegend.R;
 import com.kondee.thenewlegend.databinding.ActivityMainBinding;
@@ -28,7 +30,25 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(contentContainer, MainFragment.newInstance(),"MainFragment")
+                .replace(contentContainer, MainFragment.newInstance(), "MainFragment")
                 .commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.reloadBtn) {
+            MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag("MainFragment");
+            if (mainFragment != null) {
+                mainFragment.loadPeopleData();
+                mainFragment.showAlertDialog();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
