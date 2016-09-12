@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/layoutFmMain"
@@ -13,5 +14,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
            android:divider="@null"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:tint="@color/colorWhite"
+            android:src="@drawable/plus_big"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:theme="@style/Widget.Design.FloatingActionButton" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>

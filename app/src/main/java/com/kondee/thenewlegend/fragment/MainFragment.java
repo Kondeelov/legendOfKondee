@@ -69,8 +69,8 @@ public class MainFragment extends Fragment {
                     PeopleListItemDao dao = response.body();
                     PeopleListManager.getInstance().setDao(dao);
 
-                    adapter.notifyDataSetChanged();
                     progressDialog.dismiss();
+                    adapter.notifyDataSetChanged();
                 } else {
                     progressDialog.dismiss();
                     try {

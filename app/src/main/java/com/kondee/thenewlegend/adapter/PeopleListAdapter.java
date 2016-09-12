@@ -13,28 +13,29 @@ import android.widget.Toast;
 import com.kondee.thenewlegend.R;
 import com.kondee.thenewlegend.databinding.ListItemPeopleBinding;
 import com.kondee.thenewlegend.manager.http.PeopleListManager;
+import com.kondee.thenewlegend.model.PeopleDataItemDao;
 import com.kondee.thenewlegend.model.PeopleListItemDao;
+import com.kondee.thenewlegend.utils.DateFormatUtils;
 import com.kondee.thenewlegend.view.PeopleItemList;
 
 public class PeopleListAdapter extends BaseAdapter {
 
     private static final String TAG = "Kondee";
-    private PeopleListItemDao dao = PeopleListManager.getInstance().getDao();
 
     @Override
     public int getCount() {
-        if (dao == null) {
-            return 50;
+        if (PeopleListManager.getInstance().getDao() == null) {
+            return 0;
         }
-        if (dao.getItem() == null) {
-            return 50;
+        if (PeopleListManager.getInstance().getDao().getItem() == null) {
+            return 0;
         }
-        return dao.getItem().size();
+        return PeopleListManager.getInstance().getDao().getItem().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return dao.getItem().get(position);
+        return PeopleListManager.getInstance().getDao().getItem().get(position);
     }
 
     @Override
@@ -46,15 +47,17 @@ public class PeopleListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         PeopleItemList item;
         if (convertView != null) {
-            item = (PeopleItemList)convertView;
+            item = (PeopleItemList) convertView;
         } else {
             item = new PeopleItemList(parent.getContext());
         }
 
+        PeopleDataItemDao dao = (PeopleDataItemDao) getItem(position);
+
         item.setIdNo(String.valueOf(getItemId(position)));
-        item.setFirstName(dao.getItem().get(position).getFirstName());
-        item.setLastName(dao.getItem().get(position).getLastName());
-        item.setDateTime(dao.getItem().get(position).getLastUpdated().toString());
+        item.setFirstName(dao.getFirstName());
+        item.setLastName(dao.getLastName());
+        item.setDateTime(DateFormatUtils.newInstance().setDateFromServer(dao.getLastUpdated().toString()));
 
         return item;
     }

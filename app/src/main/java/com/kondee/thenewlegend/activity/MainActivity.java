@@ -1,17 +1,21 @@
 package com.kondee.thenewlegend.activity;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.kondee.thenewlegend.R;
 import com.kondee.thenewlegend.databinding.ActivityMainBinding;
 import com.kondee.thenewlegend.fragment.MainFragment;
 
 import static com.kondee.thenewlegend.R.id.contentContainer;
+import static com.kondee.thenewlegend.R.id.reloadBtn;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.reloadBtn) {
+
+            ObjectAnimator animator = ObjectAnimator.ofFloat(findViewById(R.id.reloadBtn), View.ROTATION ,200f);
+            animator.setRepeatCount(1000);
+            animator.start();
             MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag("MainFragment");
             if (mainFragment != null) {
                 mainFragment.loadPeopleData();

@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.kondee.thenewlegend.databinding.ListItemPeopleBinding;
+import com.kondee.thenewlegend.manager.Contextor;
 
 public class PeopleItemList extends FrameLayout {
 
@@ -43,8 +44,8 @@ public class PeopleItemList extends FrameLayout {
     }
 
     private void initInflate() {
-        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        binding = ListItemPeopleBinding.inflate(inflater,this,true);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        binding = ListItemPeopleBinding.inflate(inflater, this, true);
     }
 
     private void initInstance() {
@@ -55,16 +56,19 @@ public class PeopleItemList extends FrameLayout {
 
     }
 
-    public void setIdNo(String idNo){
+    public void setIdNo(String idNo) {
         binding.tvIdNo.setText(idNo);
     }
-    public void setFirstName(String firstName){
+
+    public void setFirstName(String firstName) {
         binding.tvFirstName.setText(firstName);
     }
-    public void setLastName(String lastName){
+
+    public void setLastName(String lastName) {
         binding.tvLastName.setText(lastName);
     }
-    public void setDateTime(String dateTime){
+
+    public void setDateTime(String dateTime) {
         binding.tvDateTime.setText(dateTime);
     }
 }
