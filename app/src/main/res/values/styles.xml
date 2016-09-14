@@ -10,4 +10,6 @@
 
     <style name="AppTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert"/>
+
 </resources>

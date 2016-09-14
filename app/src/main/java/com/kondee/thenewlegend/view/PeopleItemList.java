@@ -4,16 +4,22 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kondee.thenewlegend.databinding.ListItemPeopleBinding;
 import com.kondee.thenewlegend.manager.Contextor;
 
 public class PeopleItemList extends FrameLayout {
 
-    ListItemPeopleBinding binding;
+    private static final String TAG = "Kondee";
+    public ListItemPeopleBinding binding;
 
     public PeopleItemList(Context context) {
         super(context);
@@ -49,7 +55,32 @@ public class PeopleItemList extends FrameLayout {
     }
 
     private void initInstance() {
-
+//        final float[] x = new float[1];
+//        final float[] vX = new float[1];
+//
+//        binding.cardView.setOnTouchListener(new OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        vX[0] = v.getX();
+//                        x[0] = event.getRawX();
+//                        return true;
+//                    case MotionEvent.ACTION_MOVE:
+//                        if (event.getRawX() - x[0] > 0)
+//                            getParent().requestDisallowInterceptTouchEvent(true);
+//                            v.setX(event.getRawX() - x[0]);
+//                        return true;
+//                    case MotionEvent.ACTION_UP:
+//                        v.setX(vX[0]);
+//                        return true;
+//                    case MotionEvent.ACTION_CANCEL:
+//                        v.setX(vX[0]);
+//                        return true;
+//                }
+//                return false;
+//            }
+//        });
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {

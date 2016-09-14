@@ -13,7 +13,7 @@
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-           android:divider="@null"/>
+            android:divider="@null" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAdd"
@@ -23,9 +23,7 @@
             android:layout_marginBottom="@dimen/fab_margin"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
-            android:tint="@color/colorWhite"
             android:src="@drawable/plus_big"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:theme="@style/Widget.Design.FloatingActionButton" />
+            android:tint="@color/colorWhite" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>
