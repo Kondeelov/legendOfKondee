@@ -84,6 +84,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         adapter = new PeopleListAdapter(this);
         binding.listView.setAdapter(adapter);
         binding.listView.setItemsCanFocus(true);
+        binding.listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showEditPeopleDialog("Update");
+                return true;
+            }
+        });
 
         binding.fabAdd.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -194,7 +201,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-        Log.d(TAG, "deletePeopleData: " + deletedialog);
+//        Log.d(TAG, "deletePeopleData: " + deletedialog);
         if (deletedialog != null) {
             if (!deletedialog.isShowing())
                 deletedialog = deleteBuilder.show();
