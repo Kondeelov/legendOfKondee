@@ -2,21 +2,26 @@ package com.kondee.thenewlegend.adapter;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.kondee.thenewlegend.R;
@@ -32,7 +37,6 @@ public class PeopleListAdapter extends BaseAdapter {
 
     private static final String TAG = "Kondee";
     MainFragment fragment;
-//    GestureDetectorCompat gesture;
 //    View view;
 
     public PeopleListAdapter(MainFragment fragment) {
@@ -62,6 +66,7 @@ public class PeopleListAdapter extends BaseAdapter {
         return position + 1;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
@@ -73,92 +78,71 @@ public class PeopleListAdapter extends BaseAdapter {
         }
 
         final PeopleDataItemDao dao = (PeopleDataItemDao) getItem(position);
+        final FloatingActionButton[] fabDelete = new FloatingActionButton[1];
+        final FloatingActionButton[] fabEdit = new FloatingActionButton[1];
 
-        final float[] x = new float[1];
-        final float[] vX = new float[1];
-//        final long[] eTime = new long[1];
+        item.binding.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                fabDelete[0] = new FloatingActionButton(parent.getContext());
+                fabDelete[0].setBackgroundTintList(ColorStateList.valueOf(parent.getResources().getColor(R.color.colorRedLight)));
+                fabDelete[0].setImageResource(R.drawable.garbage);
+                fabDelete[0].setX(parent.getWidth() - 145);
+                fabDelete[0].setY(20);
+                fabDelete[0].show();
 
-//        gesture = new GestureDetectorCompat(parent.getContext(), new GestureDetector.OnGestureListener() {
-//            @Override
-//            public boolean onDown(MotionEvent e) {
-//
-//                return true;
-//            }
-//
-//            @Override
-//            public void onShowPress(MotionEvent e) {
-//                view.getParent().requestDisallowInterceptTouchEvent(true);
-//            }
-//
-//            @Override
-//            public boolean onSingleTapUp(MotionEvent e) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//                if (e2.getRawX() - e1.getRawX() > 0)
-//                    view.setX(e2.getRawX() - e1.getRawX());
-//                //Log.d(TAG, "onScroll: "+e2.getRawX()+" "+distanceX);
-//                return true;
-//            }
-//
-//            @Override
-//            public void onLongPress(MotionEvent e) {
-//
-//            }
-//
-//            @Override
-//            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//                return false;
-//            }
-//
-//        });
+                fabEdit[0] = new FloatingActionButton(parent.getContext());
+                fabEdit[0].setBackgroundTintList(ColorStateList.valueOf(parent.getResources().getColor(R.color.colorGrayLight)));
+                fabEdit[0].setImageResource(R.drawable.edit);
+                fabEdit[0].setX(parent.getWidth() - 275);
+                fabEdit[0].setY(20);
+                fabEdit[0].show();
 
+                fabDelete[0].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        fabDelete[0].hide();
+                        fabEdit[0].hide();
 
-        item.binding.cardView.setOnTouchListener(new View.OnTouchListener() {
+                        fragment.deletePeopleData(dao.getEtag(), dao.getIdNo());
+                    }
+                });
+                fabEdit[0].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        fabDelete[0].hide();
+                        fabEdit[0].hide();
 
-                                                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                                     @Override
-                                                     public boolean onTouch(View v, MotionEvent event) {
+                        fragment.showEditPeopleDialog("Update");
+                    }
+                });
 
-//                                                         gesture.onTouchEvent(event);
-//                                                         view = v;
+                item.binding.cardViewContainer.addView(fabDelete[0]);
+                item.binding.cardViewContainer.addView(fabEdit[0]);
 
-                                                         switch (event.getAction()) {
-                                                             case MotionEvent.ACTION_DOWN:
-                                                                 vX[0] = v.getX();
-                                                                 x[0] = event.getRawX();
-                                                                 if(event.getEventTime()-event.getDownTime()>1200)
-                                                                     fragment.showAlertDialog();
-                                                                 return true;
-                                                             case MotionEvent.ACTION_MOVE:
-                                                                 if (event.getRawX() - x[0] > 0) {
-                                                                     if (v.getX() > (v.getRootView().getWidth() / 5) * 2) {
-                                                                         Log.d(TAG, "onTouch: Delete");
-                                                                         //fragment.deletePeopleData(dao.getEtag(), dao.getIdNo());
-                                                                     }
-//                                                                     if (v.getX() > v.getRootView().getWidth() / 2)
-//                                                                         return true;
-                                                                     parent.requestDisallowInterceptTouchEvent(true);
-                                                                     v.setX(event.getRawX() - x[0]);
-                                                                     final GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,new int[]{0xFFFF2222,0xFFFFFFFF});
-                                                                     item.binding.cardViewContainer.setBackground(gd);
-                                                                 }
-                                                                 return true;
-                                                             case MotionEvent.ACTION_UP:
-                                                                 v.setX(vX[0]);
-                                                                 item.binding.cardViewContainer.setBackgroundColor(parent.getResources().getColor(R.color.colorGrayLightBackground));
-                                                                 return true;
-                                                             case MotionEvent.ACTION_CANCEL:
-                                                                 v.setX(vX[0]);
-                                                                 return true;
-                                                         }
-                                                         return false;
+                return true;
+            }
+        });
 
-                                                     }
-                                                 }
-        );
+        item.binding.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fabDelete[0] != null && fabEdit[0] != null)
+                    if (fabDelete[0].isShown() && fabEdit[0].isShown()) {
+                        fabDelete[0].hide();
+                        fabEdit[0].hide();
+                    }
+            }
+        });
+
+        Log.d(TAG, "getView: "+parent.isScrollContainer());
+        if (parent.isScrollContainer()) {
+            if (fabDelete[0] != null && fabEdit[0] != null)
+                if (fabDelete[0].isShown() && fabEdit[0].isShown()) {
+                    fabDelete[0].hide();
+                    fabEdit[0].hide();
+                }
+        }
 
         item.setIdNo(String.valueOf(getItemId(position)));
         item.setFirstName(dao.getFirstName());

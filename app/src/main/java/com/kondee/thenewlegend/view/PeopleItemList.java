@@ -55,32 +55,7 @@ public class PeopleItemList extends FrameLayout {
     }
 
     private void initInstance() {
-//        final float[] x = new float[1];
-//        final float[] vX = new float[1];
-//
-//        binding.cardView.setOnTouchListener(new OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        vX[0] = v.getX();
-//                        x[0] = event.getRawX();
-//                        return true;
-//                    case MotionEvent.ACTION_MOVE:
-//                        if (event.getRawX() - x[0] > 0)
-//                            getParent().requestDisallowInterceptTouchEvent(true);
-//                            v.setX(event.getRawX() - x[0]);
-//                        return true;
-//                    case MotionEvent.ACTION_UP:
-//                        v.setX(vX[0]);
-//                        return true;
-//                    case MotionEvent.ACTION_CANCEL:
-//                        v.setX(vX[0]);
-//                        return true;
-//                }
-//                return false;
-//            }
-//        });
+
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
