@@ -24,7 +24,8 @@
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
             android:src="@drawable/plus_big"
-            android:tint="@color/colorWhite"/>
+            android:tint="@color/colorWhite"
+            app:layout_behavior="com.kondee.thenewlegend.behavior.ScrollFABBehavior" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

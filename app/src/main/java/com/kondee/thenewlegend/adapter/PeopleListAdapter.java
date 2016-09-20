@@ -135,15 +135,6 @@ public class PeopleListAdapter extends BaseAdapter {
             }
         });
 
-        Log.d(TAG, "getView: "+parent.isScrollContainer());
-        if (parent.isScrollContainer()) {
-            if (fabDelete[0] != null && fabEdit[0] != null)
-                if (fabDelete[0].isShown() && fabEdit[0].isShown()) {
-                    fabDelete[0].hide();
-                    fabEdit[0].hide();
-                }
-        }
-
         item.setIdNo(String.valueOf(getItemId(position)));
         item.setFirstName(dao.getFirstName());
         item.setLastName(dao.getLastName());
